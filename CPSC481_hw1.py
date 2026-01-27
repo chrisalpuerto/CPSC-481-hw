@@ -40,25 +40,7 @@ import json
 from google.genai import types
 import google.genai as genai
 import logging
-
-prompt = """
-            Act as an elite basketball coach and analyst. Analyze every shot attempt in this video with the following structure:
-
-            - Player Identification (if possible)
-            - Shot Type (Jump shot, Layup, Dunk, etc.)
-            - Shot Location (e.g., right corner, top of the key)
-            - Time of Shot (timestamp or visual marker)
-            - Result (Make or Miss)
-            - Form Analysis (brief breakdown of mechanics)
-            - Defensive Pressure (if present)
-
-            Be thorough, structured, and use bullet points for each shot.
-            """
-
-"""
-This 
-
-"""
+from prompts import prompt
 
 class VideoAnalysisError:
     pass
@@ -66,6 +48,9 @@ class InvalidVideoError:
     pass
 class InvalidCredentialsError:
     pass
+
+
+prompt = prompt()
 
 def vertex_summarize(gcs_uri, videoDurationSec=0, analysis_choice="regular"):
     try:
