@@ -42,11 +42,11 @@ import google.genai as genai
 import logging
 from prompts import prompt
 
-class VideoAnalysisError:
+class VideoAnalysisError(Exception):
     pass
-class InvalidVideoError:
+class InvalidVideoError(Exception):
     pass
-class InvalidCredentialsError:
+class InvalidCredentialsError(Exception):
     pass
 
 
