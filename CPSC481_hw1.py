@@ -52,7 +52,7 @@ class InvalidCredentialsError(Exception):
 
 prompt = prompt()
 
-def vertex_summarize(gcs_uri, videoDurationSec=0, analysis_choice="regular"):
+def vertex_summarize(gcs_uri, analysis_choice="regular"):
     try:
         vertex_client = genai.Client(
             vertexai=True,
@@ -60,7 +60,6 @@ def vertex_summarize(gcs_uri, videoDurationSec=0, analysis_choice="regular"):
             location="us-central1",
             http_options=types.HttpOptions(timeout=600000)
         )
-        print(f"VERTEX SUMMARIZATION: VIDEO LENGTH BEING INPUTTED: {videoDurationSec}")
         print(f"VERTEX SUMMARIZATION: ANALYSIS CHOICE: {analysis_choice}")
     except InvalidCredentialsError as e:
         # AGENT HALT: Credentials are invalid or missing - the agent cannot authenticate
@@ -139,3 +138,12 @@ def vertex_summarize(gcs_uri, videoDurationSec=0, analysis_choice="regular"):
         # This prevents the agent from continuing in an undefined state.
         logging.error(f"ERROR: general error: {str(e)}")
         return {"ok": False, "error": e}
+
+def main():
+    # gcs uri placeholder, may replace with real gcs uri later
+    gcs_uri = "gcs://..."
+    res = vertex_summarize(gcs_uri)
+    print(f"Gemini API analysis complete: {res}")
+
+if __name__ == "main":
+    main()
